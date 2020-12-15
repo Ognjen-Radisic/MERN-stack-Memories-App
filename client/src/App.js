@@ -1,16 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core'
-import memories from './images/memories.png'
+//to use REDUX we need hook useDispatch that allows us to dispatch action
+import { useDispatch } from 'react-redux'
 
 //Components
 import Posts from './components/Posts/Posts.js'
 import Form from './components/Form/Form.js'
+
+//image
+import memories from './images/memories.png'
+
+//REDUX actions
+import { getPosts } from './actions/posts.js'
 
 //Styles
 import useStyles from './styles.js'
 
 const App = () => {
   const classes = useStyles()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    //to dispatch an action we need to import 'actions' first (getPosts) and call it
+    dispatch(getPosts())
+  }, [dispatch])
 
   return (
     <Container maxWidth='lg'>
