@@ -7,9 +7,9 @@ import { TextField, Button, Typography, Paper } from '@material-ui/core'
 
 //using redux so we can dispatch form as a POST and send it
 import { useDispatch } from 'react-redux'
-import { createPost } from '../../actions/posts'
+import { createPost, updatePost } from '../../actions/posts'
 
-const Form = () => {
+const Form = ({ currentID, setCurrentID }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const [postData, setPostData] = useState({
@@ -22,9 +22,12 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('pre call')
-    dispatch(createPost(postData))
-    console.log('after call')
+
+    if (currentID) {
+      dispatch(updatePost(currentID, postData))
+    } else {
+      dispatch(createPost(postData))
+    }
   }
   const clear = () => {}
   return (

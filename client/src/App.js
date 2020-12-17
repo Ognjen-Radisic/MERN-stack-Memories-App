@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core'
 //to use REDUX we need hook useDispatch that allows us to dispatch action
 import { useDispatch } from 'react-redux'
@@ -17,6 +17,7 @@ import { getPosts } from './actions/posts.js'
 import useStyles from './styles.js'
 
 const App = () => {
+  const [currentID, setCurrentID] = useState(null)
   const classes = useStyles()
   const dispatch = useDispatch()
 
@@ -47,10 +48,10 @@ const App = () => {
             spacing={3}
           >
             <Grid item xs={12} sm={7}>
-              <Posts />
+              <Posts setCurrentID={setCurrentID} />
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Form />
+              <Form setCurrentID={setCurrentID} currentID={currentID} />
             </Grid>
           </Grid>
         </Container>

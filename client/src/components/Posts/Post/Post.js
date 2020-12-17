@@ -15,7 +15,7 @@ import moment from 'moment'
 
 import useStyles from './styles.js'
 
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentID }) => {
   const classes = useStyles()
   return (
     <Card className={classes.card}>
@@ -29,7 +29,11 @@ const Post = ({ post }) => {
         <Typography>{moment(post.createdAt).fromNow()}</Typography>
       </div>
       <div className={classes.overlay2}>
-        <Button style={{ color: 'white' }} size='small' onClick={() => {}}>
+        <Button
+          style={{ color: 'white' }}
+          size='small'
+          onClick={() => setCurrentID(post._id)}
+        >
           <MoreHorizIcon fontSize='default' />
         </Button>
       </div>
