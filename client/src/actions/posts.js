@@ -10,10 +10,26 @@ export const getPosts = () => async (dispatch) => {
   //   dispatch(action)
   try {
     //response.data
+    console.log('aaaaaaa')
     const { data } = await api.fetchPosts()
+    console.log('bbbbbbb')
 
     dispatch({ type: 'FETCH_ALL', payload: data })
+    console.log('cccccc')
   } catch (error) {
     console.log(error.message)
+  }
+}
+
+export const createPost = (post) => async (dispatch) => {
+  try {
+    console.log('aaaaaaa')
+    const { data } = await api.createPost(post)
+    console.log('bbbbbbb')
+
+    dispatch({ type: 'CREATE', payload: data })
+    console.log('cccccc')
+  } catch (error) {
+    console.log('HELOOOOU')
   }
 }

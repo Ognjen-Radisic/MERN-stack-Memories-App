@@ -5,8 +5,13 @@ import FileBase from 'react-file-base64'
 //JSX COMPONENTS FROM MATERIAL-UI
 import { TextField, Button, Typography, Paper } from '@material-ui/core'
 
+//using redux so we can dispatch form as a POST and send it
+import { useDispatch } from 'react-redux'
+import { createPost } from '../../actions/posts'
+
 const Form = () => {
   const classes = useStyles()
+  const dispatch = useDispatch()
   const [postData, setPostData] = useState({
     creator: '',
     title: '',
@@ -15,10 +20,15 @@ const Form = () => {
     selectedFile: '',
   })
 
-  const handleSubmit = () => {}
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('pre call')
+    dispatch(createPost(postData))
+    console.log('after call')
+  }
   const clear = () => {}
   return (
-    //Paper is like div and has a whiteish background and small border shadow
+    //Paper is like a div and has a whiteish background and small border shadow
     <Paper className={classes.paper}>
       <form
         autoComplete='off'
@@ -42,19 +52,17 @@ const Form = () => {
           variant='outlined'
           label='Title'
           fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
+          value={postData.title}
+          onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         />
         <TextField
           name='message'
           variant='outlined'
           label='Message'
           fullWidth
-          value={postData.creator}
+          value={postData.message}
           onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
+            setPostData({ ...postData, message: e.target.value })
           }
         />
         <TextField
@@ -62,10 +70,8 @@ const Form = () => {
           variant='outlined'
           label='Tags'
           fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
+          value={postData.tags}
+          onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
         />
         <div className={classes.fileInput}>
           <FileBase

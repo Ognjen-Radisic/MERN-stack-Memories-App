@@ -3,6 +3,7 @@ import PostMessage from '../models/postMessage.js'
 export const getPosts = async (req, res) => {
   try {
     //we make it await becouse it takes time to search database
+    console.log('oooooooo')
     const postMessages = await PostMessage.find()
 
     //200 success (request succeeded), 404 Not found
@@ -21,11 +22,12 @@ export const createPost = async (req, res) => {
 
   try {
     //asyncronys process becouse saving can take some time
+    console.log('1qw1w12w')
     await newPost.save()
 
     //201 succesful creation, 409 (conflict) failed creation
     res.status(201).json(newPost)
   } catch (error) {
-    res.status(404).json({ message: error.message })
+    res.status(409).json({ message: error.message })
   }
 }
