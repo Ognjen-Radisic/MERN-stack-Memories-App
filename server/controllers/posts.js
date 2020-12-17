@@ -37,15 +37,19 @@ export const updatePost = async (req, res) => {
   // destructuring id from page param /posts/234 and naming it _id
   //renaming because _id is moongose object id
   const { id: _id } = req.params
-  const post = req.body
+  const post = req.body // how req.body knows exatcly what info to pull
 
   if (!moongose.Types.ObjectId.isValid(_id)) {
     return res.status(404).send('Object with that id not found')
   }
 
-  const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, {
-    new: true,
-  })
+  const updatedPost = await PostMessage.findByIdAndUpdate(
+    _id,
+    { ...post, _id },
+    {
+      new: true,
+    }
+  )
 
   res.json(updatedPost)
 }

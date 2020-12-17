@@ -8,6 +8,7 @@ import Post from './Post/Post.js'
 import useStyles from './styles.js'
 
 const Posts = ({ setCurrentID }) => {
+  //fetching posts to have them displayed ***useSelector method***
   //state.posts because in reducers/index.js in combineReducers we have posts:posts
   const posts = useSelector((state) => state.posts)
   const classes = useStyles()

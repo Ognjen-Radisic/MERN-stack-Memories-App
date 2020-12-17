@@ -24,7 +24,10 @@ const App = () => {
   useEffect(() => {
     //to dispatch an action we need to import 'actions' first (getPosts) and call it
     dispatch(getPosts())
-  }, [dispatch])
+
+    //we add currentID because imidiatly after we change currentID to null in FORM (after we submit)
+    //we want to refresh the app component (not the whole page) and reload updated posts
+  }, [dispatch, currentID])
 
   return (
     <Container maxWidth='lg'>

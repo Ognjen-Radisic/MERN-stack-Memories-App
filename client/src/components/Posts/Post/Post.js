@@ -24,10 +24,14 @@ const Post = ({ post, setCurrentID }) => {
         image={post.selectedFile}
         title={post.title}
       />
+
+      {/* LEFT OVERLAY // creator and time that passed after post creation */}
       <div className={classes.overlay}>
         <Typography variant='h6'>{post.creator}</Typography>
         <Typography>{moment(post.createdAt).fromNow()}</Typography>
       </div>
+
+      {/* RIGHT overlay //Icon with 3 dots for the edit option*/}
       <div className={classes.overlay2}>
         <Button
           style={{ color: 'white' }}
@@ -37,14 +41,23 @@ const Post = ({ post, setCurrentID }) => {
           <MoreHorizIcon fontSize='default' />
         </Button>
       </div>
+
+      {/* HASHTAGS */}
       <div className={classes.details}>
         <Typography variant='body2' color='textSecondary'>
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </div>
+
+      {/* TITLE and post message */}
+      <Typography className={classes.title} variant='h4'>
+        {post.title}
+      </Typography>
       <CardContent>
         <Typography variant='h5'>{post.message}</Typography>
       </CardContent>
+
+      {/* DELETE BUTTON and LIKE BUTTON and Number of LIKES*/}
       <CardActions className={classes.cardActions}>
         <Button color='primary' size='small' onClick={() => {}}>
           <ThumbUpAltIcon fontSize='small' />
