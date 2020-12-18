@@ -73,3 +73,25 @@ export const deletePost = async (req, res) => {
 
   //now we go to fronend (client) and initiate deletion
 }
+
+export const likePost = async (req, res) => {
+  const { id } = req.params
+
+  //checking to see if ID is valid or does it exist
+  if (!moongose.Types.ObjectId.isValid(id)) {
+    return res
+      .status(404)
+      .send('Object with that id not found, cannot like the post')
+  }
+
+  //first we find the post by id
+  const post = await PostMessage.findById(id)
+
+  const likedPost = await PostMessage.findByIdAndUpdate(
+    id,
+    { likeCount: post.likeCount + 1 },
+    { new: true }
+  )
+
+  res.json(likedPost)
+}
