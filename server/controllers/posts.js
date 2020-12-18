@@ -39,6 +39,7 @@ export const updatePost = async (req, res) => {
   const { id: _id } = req.params
   const post = req.body // how req.body knows exatcly what info to pull
 
+  //checking to see if ID is valid or does it exist
   if (!moongose.Types.ObjectId.isValid(_id)) {
     return res.status(404).send('Object with that id not found')
   }
@@ -52,4 +53,23 @@ export const updatePost = async (req, res) => {
   )
 
   res.json(updatedPost)
+}
+
+export const deletePost = async (req, res) => {
+  const { id } = req.params
+
+  //checking to see if ID is valid or does it exist
+  if (!moongose.Types.ObjectId.isValid(id)) {
+    return res
+      .status(404)
+      .send('Object with that id not found, cannot be deleted')
+  }
+
+  //implement logic to delete
+  await PostMessage.findByIdAndDelete(id)
+
+  //return a message
+  res.json({ message: 'Post deleted successfully' })
+
+  //now we go to fronend (client) and initiate deletion
 }

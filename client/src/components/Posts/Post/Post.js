@@ -15,15 +15,17 @@ import moment from 'moment'
 
 import useStyles from './styles.js'
 
+//to use redux
+import { useDispatch } from 'react-redux'
+import { deletePost } from '../../../actions/posts.js'
+
 const Post = ({ post, setCurrentID }) => {
   const classes = useStyles()
+  const dispatch = useDispatch()
+
   return (
     <Card className={classes.card}>
-      <CardMedia
-        className={classes.media}
-        image={post.selectedFile}
-        title={post.title}
-      />
+      <CardMedia className={classes.media} image={post.selectedFile} />
 
       {/* LEFT OVERLAY // creator and time that passed after post creation */}
       <div className={classes.overlay}>
@@ -64,7 +66,11 @@ const Post = ({ post, setCurrentID }) => {
           Like
           {post.likeCount}
         </Button>
-        <Button color='secondary' size='small' onClick={() => {}}>
+        <Button
+          color='secondary'
+          size='small'
+          onClick={() => dispatch(deletePost(post._id))}
+        >
           <DeleteIcon fontSize='small' />
           Delete
         </Button>

@@ -6,3 +6,4 @@ export const fetchPosts = () => axios.get(url)
 export const createPost = (newPost) => axios.post(url, newPost)
 export const updatePost = (currentID, updatedPost) =>
   axios.patch(`${url}/${currentID}`, updatedPost)
+export const deletePost = (id) => axios.delete(`${url}/${id}`)

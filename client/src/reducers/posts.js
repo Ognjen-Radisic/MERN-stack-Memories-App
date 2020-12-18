@@ -20,6 +20,9 @@ export default (posts = [], action) => {
         post._id === action.payload._id ? action.payload : post
       )
 
+    case 'DELETE':
+      return posts.filter((p) => p._id !== action.payload)
+
     default:
       return posts
   }
