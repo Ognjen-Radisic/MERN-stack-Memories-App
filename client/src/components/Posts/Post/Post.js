@@ -52,11 +52,13 @@ const Post = ({ post, setCurrentID }) => {
       </div>
 
       {/* TITLE and post message */}
-      <Typography className={classes.title} variant='h4'>
+      <Typography className={classes.title} variant='h5' gutterBottom>
         {post.title}
       </Typography>
       <CardContent>
-        <Typography variant='h5'>{post.message}</Typography>
+        <Typography variant='body2' component='p' color='textSecondary'>
+          {post.message}
+        </Typography>
       </CardContent>
 
       {/* DELETE BUTTON and LIKE BUTTON and Number of LIKES*/}
@@ -67,7 +69,7 @@ const Post = ({ post, setCurrentID }) => {
           onClick={() => dispatch(likePost(post._id))}
         >
           <ThumbUpAltIcon fontSize='small' />
-          Like
+          &nbsp; Like &nbsp;
           {post.likeCount}
         </Button>
         <Button
